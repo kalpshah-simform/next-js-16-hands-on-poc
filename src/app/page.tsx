@@ -1,18 +1,14 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { cacheLife } from "next/cache";
 
 const HeroActions = dynamic(() => import("@/components/home/hero-actions"));
 
-async function getHomeSnapshotNote() {
-  "use cache";
-  cacheLife("minutes");
-
+function getHomeSnapshotNote() {
   return "Foundation setup is complete. Continue with auth and post workflows.";
 }
 
-export default async function Home() {
-  const snapshotNote = await getHomeSnapshotNote();
+export default function Home() {
+  const snapshotNote = getHomeSnapshotNote();
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-slate-100">
@@ -31,7 +27,7 @@ export default async function Home() {
         <p className="mt-3 text-slate-300">
           {snapshotNote}
         </p>
-        <p className="mt-1 text-xs text-slate-400">Cached with use cache + cacheLife profile.</p>
+        <p className="mt-1 text-xs text-slate-400">Rendered at request time for predictable auth behavior.</p>
         <HeroActions />
       </section>
     </main>
