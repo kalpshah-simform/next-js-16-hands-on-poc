@@ -2,6 +2,7 @@ import { z } from "zod";
 
 const serverEnvSchema = z.object({
   DATABASE_URL: z.url(),
+  DIRECT_URL: z.url().optional(),
   AUTH_SECRET: z
     .string()
     .min(32, "AUTH_SECRET should be at least 32 characters."),
